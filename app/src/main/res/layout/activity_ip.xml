@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".ipActivity">
+
+
+    <TextView
+        android:id="@+id/ip_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="IP comes here"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/id_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Login as"/>
+
+    <CheckBox
+        android:id="@+id/id_warning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/warning"
+        />
+
+    <Button
+        android:id="@+id/id_submittoken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Generate Token"
+        android:onClick="Submit"
+        tools:ignore="OnClick" />
+
+    <EditText
+        android:id="@+id/id_token"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:padding="10dp"
+        android:hint="TOKEN"
+        ></EditText>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Connect"
+        android:onClick="on_connect"
+        ></Button>
+
+</LinearLayout>
