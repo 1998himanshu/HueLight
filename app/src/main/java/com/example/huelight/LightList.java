@@ -23,12 +23,13 @@ public class LightList extends AppCompatActivity {
     String bridge_ip,token;
     Hue hue;
     List<String> stringArrayList = new ArrayList<>();
-    ListView listlight= findViewById(R.id.light_list);
+    ListView listlight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lights);
+        listlight= findViewById(R.id.light_list);
 
         Intent intent = getIntent();
         bridge_ip = intent.getStringExtra("bridge_ip");
