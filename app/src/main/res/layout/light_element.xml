@@ -20,6 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:id="@+id/light_switch"
+        android:focusable="false"
+        android:clickable="false"
         />
 
 </androidx.cardview.widget.CardView>
