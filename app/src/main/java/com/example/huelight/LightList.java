@@ -15,6 +15,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.cardview.widget.CardView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,13 +71,19 @@ public class LightList extends AppCompatActivity {
                 String strStatus = "";
                 if(tgl.isChecked()){
                     tgl.setChecked(false);
+                    LightDto lightDto= (LightDto) hm.get("L_object");
+                    LightState s =lightDto.getState();
+                    s.setOn(false);
+                    lightDto.setState(s);
                     strStatus = "Off";
-                    final Optional<Light> light =lights. ;
-                    light.ifPresent(l -> l.setState(State.builder().color(java.awt.Color.GREEN).keepCurrentState()));
-                }else{
-                    tgl.setChecked(true);
-                    strStatus = "On";
 
+                }else {
+                    tgl.setChecked(true);
+                    LightDto lightDto = (LightDto) hm.get("L_object");
+                    LightState s = lightDto.getState();
+                    s.setOn(true);
+                    lightDto.setState(s);
+                    strStatus = "On";
                 }
                 Toast.makeText(getBaseContext(), (String) hm.get("L_name") + " : " + strStatus, Toast.LENGTH_SHORT).show();
             }
@@ -92,14 +99,9 @@ public class LightList extends AppCompatActivity {
                 try {
                     if (hue != null) {
                         Root root = hue.getRaw();
+                        Collection<Room> room =hue.getRooms();
                         lights = (Map<String, LightDto>) root.getLights();
-                        Room room=hue.getRoomByName();
-                            LightDto l=lights.get();
-                            LightState Li = new LightState();
-                            l.setState(LightState li );
-
-
-                                ldisplay();
+                        ldisplay();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -109,14 +111,19 @@ public class LightList extends AppCompatActivity {
     }
 
     protected void ldisplay(){
+        aList=null;
         for (String name : lights.keySet()){
             // search  for value
              LightDto  lightDto= lights.get(name);
+
+
              if (lightDto != null) {
                  HashMap<String, Object> hm = new HashMap<String,Object>();
-                 hm.put("L_Name",lightDto.getName());
+                 hm.put("L_name",lightDto.getName());
                  hm.put("L_stat",lightDto.getState().isOn());
+                 hm.put("L_object",lightDto);
                  aList.add(hm);
+
                  Log.d("TAG", String.valueOf(lightDto.getState().isOn()));
                  Log.d("TAG",lightDto.getName());
              }
@@ -131,6 +138,7 @@ public class LightList extends AppCompatActivity {
 
         // Instantiating an adapter to store each items
         // R.layout.listview_layout defines the layout of each item
+
         SimpleAdapter adapter = new SimpleAdapter(getBaseContext(), aList, R.layout.light_element, from, to);
         lightlayout.setAdapter(adapter);
     }
